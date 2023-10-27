@@ -1,5 +1,6 @@
 import http from "http";
 import app from "..";
+import Logger from "../lib/logger";
 
 const port = process.env.PORT || 3000;
 app.set("port", port);
@@ -7,11 +8,11 @@ app.set("port", port);
 const server = http.createServer(app);
 
 const onError = (error: NodeJS.ErrnoException): void => {
-  console.log(error);
+  Logger.error(error);
 };
 
 const onListening = (): void => {
-  console.log(`
+  Logger.info(`
 	⚡️ Node Server mode: ${process.env.NODE_ENV}
 	⚡️ Version: ${process.env.VERSION}
 	⚡️ Listening on port: ${port}
