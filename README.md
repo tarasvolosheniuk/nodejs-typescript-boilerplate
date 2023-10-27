@@ -4,7 +4,7 @@
 This is the NodeJS TypeScript Enterprise-Ready Microservice Boilerplate. This boilerplate is designed with a strong emphasis on high-quality code and is suitable for use in enterprise-scale applications or production-intent solutions. Having 3 layer architecture in mind, this allows you to integrate libraries easily.
 
 ## API Overview
-API supports an endpoint ```\GET``` ans expect to recieve an integer number as input. The following describes the API behavior:
+The API supports an endpoint `\GET` and expects to receive an integer number as input. The following describes the API's behavior
 
 - If the integer is a multiple of 3, it will return 'G.'
 - If the integer is a multiple of 5, it will return 'N.'
