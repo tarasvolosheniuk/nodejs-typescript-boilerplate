@@ -24,6 +24,22 @@ API supports an endpoint ```\GET``` ans expect to recieve an integer number as i
 - `TypeDI` to implement dependency injector functionality
 - `Routing-controllers` to create controller classes with methods as actions that handle requests
 - `Joi` for object schema validation
+## Folder Structure
+        ├── src                     # Source files
+        │   ├── api                     # API logic with controllers, services, data-access and middlewares
+        │   ├── bin                     # Server configuration
+        │   ├── errors                  # Custom errors
+        │   ├── interfaces              # Sample interfaces
+        │   ├── lib                     # Configuration logic for logging, jobs and DI
+        │   └── utils                   # Sample utility classes
+        ├── test                    # Base unit test to cover core functionality
+        ├── .env.example            # An example .env file
+        ├── jest.config.ts          # Jest configuration file
+        └── .eslintrc.cjs           # Eslint configuration file
+## Pre-requiste
+- Typescript
+- Node.js v18.x
+
 ## Getting Started
 To start using this boilerplate, please begin by executing the `.env` copying command:
 ```bash
@@ -51,4 +67,9 @@ npm run lint
 ```bash
 npm run prod
 ```
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
