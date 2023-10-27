@@ -8,6 +8,8 @@ export default class SampleService implements ISampleService {
     this.utils = Container.get("utils");
   }
   ValidateNumberParams = (value: number): string => {
+    if (!Number.isInteger(value)) throw TypeError("Value must be an integer!");
+
     let result = "";
 
     if (this.utils.isMultipleOf3(value)) result = "G";
