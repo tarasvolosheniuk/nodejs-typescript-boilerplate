@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
-import Container, { Service } from "typedi";
+import { Response } from "express";
+import Container from "typedi";
 import SampleService from "../services";
-
-@Service("transient")
+import { Controller, Param, Res, Get, UseBefore } from "routing-controllers";
+import validateNumberParam from "../middlewares/validate-number-sample";
+@Controller()
 export default class SampleController {
   sampleService: SampleService;
 
@@ -10,7 +11,10 @@ export default class SampleController {
     this.sampleService = Container.get("SampleService");
   }
 
-  DefaultRoute = (request: Request, response: Response) => {
-    this.sampleService.ValidateNumberParams(request, response);
-  };
+  @Get("/:value")
+  @UseBefore(validateNumberParam)
+  DefaultRoute(@Param("value") value: number, @Res() response: Response) {
+    const result = this.sampleService.ValidateNumberParams(value);
+    return response.json({ result }).send();
+  }
 }

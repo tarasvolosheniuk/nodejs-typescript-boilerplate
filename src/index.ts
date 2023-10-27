@@ -6,9 +6,6 @@ import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import appRouter from "./api/routes/app/app.route";
-import { NotFoundError } from "./errors";
-import Logger from "./lib/logger";
 
 dotenv.config();
 
@@ -65,15 +62,6 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept",
   );
   next();
-});
-
-// Routes definitions
-app.use(`/`, appRouter);
-
-// Handling undefined routes
-app.all("*", (req) => {
-  Logger.error(`Route ${req.method} ${req.url} not found`);
-  throw new NotFoundError("Route Not Found");
 });
 
 export default app;

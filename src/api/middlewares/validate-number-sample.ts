@@ -15,7 +15,7 @@ const validateNumberParam = async (
 
   if (error) {
     Logger.error(`validateNumberParam middleware error: ${error.message}`);
-    return response.json({ message: error.message }).send();
+    return response.status(400).json({ message: error.message }).send();
   }
 
   next();
