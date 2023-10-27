@@ -1,9 +1,14 @@
+import "reflect-metadata";
+import "./lib";
 import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import appRouter from "./api/routes/app/app.route";
+import { NotFoundError } from "./errors";
+import Logger from "./lib/logger";
 
 dotenv.config();
 
@@ -38,7 +43,7 @@ app.use(
     secret: SECRET,
     resave: false,
     saveUninitialized: false,
-    /* Store session in mongodb */
+    // Store session in mongodb
     // store: mongoStore,
     unset: "destroy",
   }),
@@ -52,21 +57,23 @@ app.use(
   }),
 );
 
-/**
- * Headers configuration
- */
+// Headers configuration
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL); // Set needed Client URL
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept",
   );
-  console.log(req.url, req.params);
   next();
 });
 
-app.all("*", () => {
-  throw new Error("Route not found");
+// Routes definitions
+app.use(`/`, appRouter);
+
+// Handling undefined routes
+app.all("*", (req) => {
+  Logger.error(`Route ${req.method} ${req.url} not found`);
+  throw new NotFoundError("Route Not Found");
 });
 
 export default app;
